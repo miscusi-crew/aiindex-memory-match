@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Memory Match</title>
+<link rel="icon" href="icon.svg">
+<link rel="stylesheet" href="base.css">
+<style>
+  .board{display:grid;gap:.5rem;margin:.75rem 0;max-width:480px}
+  .card{aspect-ratio:3/4;padding:0;border:0;border-radius:.6rem;background:transparent;perspective:600px}
+  .inner{position:relative;display:block;width:100%;height:100%;transition:transform .3s;transform-style:preserve-3d}
+  .card.up .inner{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:.6rem;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+  .back{background:var(--accent);background-image:repeating-linear-gradient(45deg,transparent 0 8px,rgba(255,255,255,.12) 8px 16px)}
+  .front{background:var(--card);border:1px solid var(--line);transform:rotateY(180deg);font-size:clamp(1.6rem,8vw,2.6rem)}
+  .card.done .front{background:color-mix(in srgb,var(--good) 18%,var(--card))}
+  @media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Memory Match</h1>
+  <p class="sub">Turn over two cards at a time and find all the pairs.</p>
+  <div class="row">
+    <label for="size">Pairs</label>
+    <select id="size">
+      <option value="6">6 pairs</option>
+      <option value="8" selected>8 pairs</option>
+      <option value="12">12 pairs</option>
+    </select>
+    <button id="new" class="primary">New game</button>
+  </div>
+  <div class="stats"><span>Moves <b id="moves">0</b></span><span>Pairs <b id="pairs">0</b></span><span>Best <b id="best">–</b></span></div>
+  <div class="board" id="board"></div>
+  <p class="msg" id="msg" role="status"></p>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
